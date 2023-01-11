@@ -1,0 +1,288 @@
+@import "~bootstrap/scss/bootstrap";
+
+body {
+  font-family: 'Inter', system-ui;
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #e7f6ff;
+  font-size: 14px;
+}
+
+.wrapper {
+  background-color: #ffffff;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, .04);
+  border-radius: 20px;
+  max-width: 1080px;
+  margin: 50px auto;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  padding: 45px;
+  border-bottom: 1px solid #eaeaea;
+
+  &-logo {
+    display: flex;
+    align-items: center;
+
+    &__title {
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .logo {
+      width: auto;
+      height: 40px;
+    }
+  }
+
+  &-cart {
+    display: flex;
+    align-items: center;
+
+    &__cart {
+      display: flex;
+      align-items: center;
+    }
+
+    &__image, &__favorites, &__cabinet {
+      width: 20px;
+      height: 20px;
+      fill: #9b9b9b;
+    }
+
+    &__favorites, &__cabinet {
+      margin-left: 30px;
+    }
+
+    &__price {
+      color: #5c5c5c;
+      font-weight: 600;
+      margin-left: 10px;
+    }
+  }
+}
+
+.main-slider {
+  padding: 45px;
+}
+
+.content {
+  padding: 45px;
+
+  h1 {
+	margin: 0;
+	font-size: 32px;
+	font-weight: 700;
+  }
+
+  .card {
+	border: 1px solid #f8f8f8;
+	padding: 25px;
+  	border-radius: 40px;
+	transition: box-shadow .3s ease-in-out, transform .3s ease-in-out;
+
+	&-image {
+	  height: 100%;
+	  width: 120px;
+	}
+
+	&-price {
+	  &__title {
+		text-transform: uppercase;
+		color: #bdbdbd;
+	  }
+
+	  &__price {
+		font-weight: 700;
+		color: #000;
+	  }
+	}
+
+	&-add {
+	  background: #fff;
+	  border: 1px solid #f2f2f2;
+	  box-sizing: border-box;
+	  border-radius: 8px;
+	  width: 30px;
+	  height: 30px;
+	  cursor: pointer;
+	  font-size: 20px;
+	  color: #c7c7c7;
+	  display: flex;
+	  justify-content: center;
+	  align-items: center;
+	  transition: background-color .3s, color .3s;
+	  padding: 0;
+
+	  &:hover {
+		background-color: #3CC755;
+		color: #fff;
+	  }
+	}
+
+	&:hover {
+	  transform: translateY(-5px);
+	  box-shadow: 0 20px 35px rgba(0, 0, 0, .06);
+	}
+
+	&-favorite {
+	  border: 1px solid #f8f8f8;
+	  border-radius: 10px;
+	  background-color: transparent;
+	  padding: 0;
+	  margin: 0;
+	  display: flex;
+	  align-items: center;
+	  justify-content: center;
+	  align-self: center;
+	  position: absolute;
+	  left: 30px;
+	  top: 30px;
+	  width: 35px;
+	  height: 35px;
+	  transition: background-color .3s ease-in-out;
+
+	  svg {
+		fill: #ececec;
+		transition: fill .3s ease-in-out;
+	  }
+
+	  &:hover, &.is-active {
+		background-color: #FEF0F0;
+
+		svg {
+		  fill: #ff8585;
+		}
+	  }
+	}
+  }
+
+  &-products {
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	row-gap: 30px;
+	column-gap: 30px;
+  }
+
+  .search {
+	&-block {
+	  border-radius: 10px;
+	  border: 1px solid #f3f3f3;
+	  height: 45px;
+	  width: 250px;
+	  padding: 10px;
+	  display: flex;
+	  align-items: center;
+
+	  input[type="search"] {
+		border: none;
+		outline: none;
+		margin-left: 10px;
+		color: #c4c4c4;
+	  }
+	}
+
+	&-icon {
+	  fill: #e4e4e4;
+	}
+  }
+}
+
+.overlay {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, .5);
+}
+
+.drawer {
+  position: absolute;
+  width: 400px;
+  height: 100%;
+  right: 0;
+  background: #fff;
+  box-shadow: -10px 4px 24px rgba(0, 0, 0, .1);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+
+  h2 {
+	margin: 0;
+  }
+}
+
+.cart {
+  &-items {
+	flex: 1;
+  }
+
+  &-item {
+	display: flex;
+	align-items: center;
+	border: 1px solid #f3f3f3;
+	border-radius: 20px;
+	padding: 10px;
+
+	&:not(:first-child) {
+	  margin-top: 20px;
+	}
+
+	&__image {
+	  width: 85px;
+	}
+
+	&__description {
+	  margin: 15px 15px 0 15px;
+
+	  .item-price {
+		font-weight: 900;
+		margin-top: 10px;
+	  }
+	}
+
+	&__delete {
+	  border: 1px solid #dbdbdb;
+	  background: #fff;
+	  padding: 5px;
+	  border-radius: 8px;
+	  transition: background-color .3s ease-in-out;
+
+	  svg {
+		fill: #b5b5b5;
+		width: 15px;
+		height: 15px;
+		transition: fill .3s ease-in-out;
+	  }
+
+	  &:hover {
+		background-color: #dbdbdb;
+
+		svg {
+		  fill: #fff;
+		}
+	  }
+	}
+  }
+
+  &-total {
+	&__dashed {
+	  flex: 1;
+	  height: 1px;
+	  border-bottom: 1px dashed #dfdfdf;
+	  align-self: flex-end;
+	  margin: 0 10px 5px;
+	}
+
+	&__price {
+	  font-weight: 900;
+	}
+  }
+}
