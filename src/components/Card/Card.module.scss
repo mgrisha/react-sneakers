@@ -1,0 +1,86 @@
+.card {
+  border: 1px solid #f8f8f8;
+  padding: 25px;
+  border-radius: 40px;
+  transition: box-shadow .3s ease-in-out, transform .3s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+
+  &-image {
+	height: 100%;
+	width: 120px;
+	align-self: center;
+  }
+
+  &-price {
+	&__title {
+	  text-transform: uppercase;
+	  color: #bdbdbd;
+	}
+
+	&__price {
+	  font-weight: 700;
+	  color: #000;
+	}
+  }
+
+  &-add {
+	background: #fff;
+	border: 1px solid #f2f2f2;
+	box-sizing: border-box;
+	border-radius: 8px;
+	width: 30px;
+	height: 30px;
+	cursor: pointer;
+	font-size: 20px;
+	color: #c7c7c7;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	transition: background-color .3s, color .3s;
+	padding: 0;
+
+	&:hover,
+	&.is-active {
+	  background-color: #3CC755;
+	  color: #fff;
+	}
+  }
+
+  &:hover {
+	transform: translateY(-5px);
+	box-shadow: 0 20px 35px rgba(0, 0, 0, .06);
+  }
+
+  &-favorite {
+	border: 1px solid #f8f8f8;
+	border-radius: 10px;
+	background-color: transparent;
+	padding: 0;
+	margin: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	align-self: center;
+	position: absolute;
+	left: 30px;
+	top: 30px;
+	width: 35px;
+	height: 35px;
+	transition: background-color .3s ease-in-out;
+
+	svg {
+	  fill: #ececec;
+	  transition: fill .3s ease-in-out;
+	}
+
+	&:hover, &.is-active {
+	  background-color: #FEF0F0;
+
+	  svg {
+		fill: #ff8585;
+	  }
+	}
+  }
+}

@@ -1,7 +1,8 @@
 import React from 'react';
 import { BsCart3, BsHeart, BsPersonCircle } from "react-icons/bs";
 
-function Header() {
+function Header({ onOpenCart }) {
+	console.log(onOpenCart)
 	return (
 		<header className="header">
 			<div className="header-logo">
@@ -12,7 +13,7 @@ function Header() {
 				</div>
 			</div>
 			<div className="header-cart">
-				<div className="header-cart__cart">
+				<div className="header-cart__cart" onClick={onOpenCart}>
 					<BsCart3 className="header-cart__image" />
 					<span className="header-cart__price">2 500 грн</span>
 				</div>
