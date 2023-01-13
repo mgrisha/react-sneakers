@@ -70,7 +70,7 @@ export default function App() {
 	}, []);
 
 	const onAddToCart = (item) => {
-		console.log('add to cart');
+		console.log(item);
 	}
 
 	return (

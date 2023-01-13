@@ -6,8 +6,8 @@ import styles from './Card.module.scss';
 export default function Card({ title, image, price, onAddToCart }) {
 	const [isAdded, setIsAdded] = useState(false);
 
-	const addToCart = (key) => {
-		onAddToCart();
+	const addToCart = () => {
+		onAddToCart({ title, image, price });
 		setIsAdded(!isAdded);
 	}
 
