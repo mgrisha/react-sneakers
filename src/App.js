@@ -1,4 +1,5 @@
 import { BsSearch } from "react-icons/bs";
+import axios from "axios";
 import Header from "./components/Header";
 import Drawer from "./components/Drawer";
 import Card from "./components/Card";
@@ -58,45 +59,72 @@ export default function App() {
 	const [items, setItems] = useState([]);
 	const [cartItems, setCartItems] = useState([]);
 	const [cartOpened, setCartOpened] = useState(false);
+	const [searchItem, setSearchItem] = useState('');
+	// const [totalPrice, setTotalPrice] = useState(0);
 
 	useEffect(() => {
-		fetch('https://63c1c10f99c0a15d28f184b1.mockapi.io/items')
-			.then((res) => {
-				return res.json();
-			})
-			.then((json) => {
-				setItems(json);
-			});
+		// fetch('https://63c1c10f99c0a15d28f184b1.mockapi.io/items')
+		// 	.then((res) => {
+		// 		return res.json();
+		// 	})
+		// 	.then((json) => {
+		// 		setItems(json);
+		// 	});
+		axios.get('https://63c1c10f99c0a15d28f184b1.mockapi.io/items').then(res => {
+			setItems(res.data);
+		});
+		axios.get('https://63c1c10f99c0a15d28f184b1.mockapi.io/cart').then(res => {
+			setCartItems(res.data);
+		});
 	}, []);
 
 	const onAddToCart = (item) => {
-		console.log(item);
+		axios.post('https://63c1c10f99c0a15d28f184b1.mockapi.io/cart', item);
+		setCartItems((prev) => [...prev, item]);
+		// cartItems.map((cartItem) => );
+		// setCartItems((prev) => {
+		// 	let newItem = null;
+		// 	if (prev !== item) {
+		// 		newItem = item;
+		// 	}
+		// 	return [...prev, newItem];
+		// });
+		// setCartItems((prev) => cartItems.filter((cartItem => )))
+	}
+
+	const deleteItemFromCart = (id) => {
+		axios.delete(`https://63c1c10f99c0a15d28f184b1.mockapi.io/cart${id}`);
+		setCartItems(prev => prev.filter(item => item.id !== id));
+	}
+
+	const searchItems = (event) => {
+		setSearchItem(event.target.value);
 	}
 
 	return (
 		<div className="wrapper">
-			{cartOpened && <Drawer cartItems={cartItems} onCloseCart={() => setCartOpened(false)} />}
-			<Header onOpenCart={() => setCartOpened(true)} />
+			{cartOpened && <Drawer cartItems={cartItems} onCloseCart={() => setCartOpened(false)} onDeleteItem={deleteItemFromCart} />}
+			<Header onOpenCart={() => setCartOpened(true)} totalPrice={0} />
 			<div className="main-slider">Main Slider</div>
 			<div className="content">
 				<div className="d-flex align-items-center justify-content-between mb-5">
-					<h1>Всі кросівки</h1>
+					<h1>{}</h1>
 					<div className="search-block d-flex">
 						<BsSearch className="search-icon" />
-						<input type="search" placeholder="Пошук..." />
+						<input type="search" placeholder="Пошук..." onChange={searchItems} />
 					</div>
 				</div>
 				<div className="content-products">
 					{
-						items.map(({ key, title, price, image }) => (
-							<div key={key}>
-								<Card
-									title={title}
-									price={price}
-									image={image}
-									onAddToCart={onAddToCart}
-								/>
-							</div>
+						items.filter((item) => item.title.toLowerCase().includes(searchItem)).map(({ id, title, price, image }) => (
+							<Card
+								key={id}
+								id={id}
+								title={title}
+								price={price}
+								image={image}
+								onAddToCart={onAddToCart}
+							/>
 						))
 					}
 				</div>

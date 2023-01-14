@@ -1,7 +1,8 @@
 import React from 'react';
 import { BsArrowRight, BsX } from "react-icons/bs";
 
-function Drawer({ cartItems, onCloseCart }) {
+function Drawer({ cartItems, onCloseCart, onDeleteItem }) {
+	console.log(cartItems);
 	return (
 		<div className="overlay">
 			<div className="drawer">
@@ -15,13 +16,13 @@ function Drawer({ cartItems, onCloseCart }) {
 				<div className="cart-items">
 					{
 						cartItems && cartItems.map((cartItem) => (
-							<div className="cart-item">
+							<div className="cart-item" key={cartItem.id}>
 								<img className="cart-item__image" src={"/static/images/products/"+cartItem.image} alt="Sneakers" />
 								<div className="cart-item__description">
 									<div className="item-title">{cartItem.title}</div>
 									<div className="item-price">{cartItem.price} грн</div>
 								</div>
-								<button className="cart-item__delete">
+								<button className="cart-item__delete" onClick={() => onDeleteItem(cartItem.id)}>
 									<BsX />
 								</button>
 							</div>

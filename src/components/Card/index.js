@@ -3,11 +3,11 @@ import { BsHeart, BsPlus, BsCheck } from "react-icons/bs";
 
 import styles from './Card.module.scss';
 
-export default function Card({ title, image, price, onAddToCart }) {
+export default function Card({ id, title, image, price, onAddToCart }) {
 	const [isAdded, setIsAdded] = useState(false);
 
 	const addToCart = () => {
-		onAddToCart({ title, image, price });
+		onAddToCart({ id, title, image, price });
 		setIsAdded(!isAdded);
 	}
 
