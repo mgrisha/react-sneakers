@@ -70,32 +70,38 @@ export default function App() {
 		});
 		axios.get('https://63c1c10f99c0a15d28f184b1.mockapi.io/cart').then(res => {
 			setCartItems(res.data);
+			console.log(res.data);
+		});
+		axios.get('https://63c1c10f99c0a15d28f184b1.mockapi.io/favorite').then(res => {
+			setFavItems(res.data);
+			console.log(res.data);
 		});
 	}, []);
 
 	const onAddToCart = (item) => {
-		if (cartItems.find((cartItem) => cartItem.uniqId=== item.uniqId)) {
-			// axios.delete(`https://63c1c10f99c0a15d28f184b1.mockapi.io/cart/${item.id}`);
-			setCartItems((prev) => prev.filter((prevItem) => prevItem.uniqId !== item.uniqId));
+		if (cartItems.find((cartItem) => cartItem.id === item.id)) {
+			axios.delete(`https://63c1c10f99c0a15d28f184b1.mockapi.io/cart/${item.id}`);
+			setCartItems((prev) => prev.filter((prevItem) => prevItem.id !== item.id));
+
 		} else {
-			// axios.post('https://63c1c10f99c0a15d28f184b1.mockapi.io/cart', item);
+			axios.post('https://63c1c10f99c0a15d28f184b1.mockapi.io/cart', item);
 			setCartItems((prev) => [...prev, item]);
 		}
 	}
 
 	const onAddToFavorite = (item) => {
-		if (favItems.find((favItem) => favItem.uniqId === item.uniqId)) {
-			axios.delete(`https://63c1c10f99c0a15d28f184b1.mockapi.io/favorite/${item.uniqId}`);
-			setFavItems((prev) => prev.filter((prevItem) => prevItem.uniqId !== item.uniqId));
+		if (favItems.find((favItem) => favItem.id === item.id)) {
+			axios.delete(`https://63c1c10f99c0a15d28f184b1.mockapi.io/favorite/${item.id}`);
+			setFavItems((prev) => prev.filter((prevItem) => prevItem.id !== item.id));
 		} else {
 			axios.post('https://63c1c10f99c0a15d28f184b1.mockapi.io/favorite', item);
 			setFavItems((prev) => [...prev, item]);
 		}
 	}
 
-	const deleteItemFromCart = (uniqId) => {
-		axios.delete(`https://63c1c10f99c0a15d28f184b1.mockapi.io/cart/${uniqId}`);
-		setCartItems(prev => prev.filter(item => item.uniqId !== uniqId));
+	const deleteItemFromCart = (id) => {
+		axios.delete(`https://63c1c10f99c0a15d28f184b1.mockapi.io/cart/${id}`);
+		setCartItems(prev => prev.filter(item => item.id !== id));
 	}
 
 	const searchItems = (event) => {
@@ -117,14 +123,17 @@ export default function App() {
 				</div>
 				<div className="content-products">
 					{
-						items.filter((item) => item.title.toLowerCase().includes(searchItem)).map((item) => (
-							<Card
-								key={item.uniqId}
-								{...item}
-								onAddToCart={onAddToCart}
-								onAddToFavorite={onAddToFavorite}
-							/>
-						))
+						items.filter((item) => item.title.toLowerCase().includes(searchItem)).map((item) => {
+							console.log(item);
+							return (
+								<Card
+									key={item.id}
+									{...item}
+									onAddToCart={onAddToCart}
+									onAddToFavorite={onAddToFavorite}
+								/>
+							);
+						})
 					}
 				</div>
 

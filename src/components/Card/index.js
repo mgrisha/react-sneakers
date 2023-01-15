@@ -3,17 +3,17 @@ import { BsHeart, BsPlus, BsCheck } from "react-icons/bs";
 
 import styles from './Card.module.scss';
 
-export default function Card({ uniqId, title, image, price, onAddToCart, onAddToFavorite }) {
+export default function Card({ id, title, image, price, onAddToCart, onAddToFavorite }) {
 	const [isAdded, setIsAdded] = useState(false);
 	const [isFavorite, setIsFavorite] = useState(false);
 
 	const addToCart = () => {
-		onAddToCart({ uniqId, title, image, price });
+		onAddToCart({ id, title, image, price });
 		setIsAdded(!isAdded);
 	}
 
 	const addToFavorite = () => {
-		onAddToFavorite({ uniqId, title, image, price });
+		onAddToFavorite({ id, title, image, price });
 		setIsFavorite(!isFavorite);
 	}
 
