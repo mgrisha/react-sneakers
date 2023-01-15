@@ -173,6 +173,13 @@ body {
 }
 
 .cart {
+  &-full {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	height: 100%;
+  }
+
   &-items {
 	flex: 1;
 	overflow: auto;
@@ -228,6 +235,36 @@ body {
 	}
   }
 
+  &--button {
+	height: 50px;
+	background: #9dd558;
+	border-radius: 18px;
+	color: #ffffff;
+	border: 0;
+	outline: none;
+	width: 100%;
+	margin-top: 40px;
+	position: relative;
+	font-size: 16px;
+	transition: background .2s ease-in-out;
+
+	svg {
+	  position: absolute;
+	  top: 50%;
+	  transform: translateY(-50%);
+	  width: 20px;
+	  height: 20px;
+	}
+
+	&:hover {
+	  background: lighten(#9dd558, 5%);
+	}
+
+	&:active {
+	  background: darken(#9dd558, 5%);
+	}
+  }
+
   &-total {
 	&__dashed {
 	  flex: 1;
@@ -242,38 +279,48 @@ body {
 	}
 
 	&__button {
-	  height: 50px;
-	  background: #9dd558;
-	  border-radius: 18px;
-	  color: #ffffff;
-	  border: 0;
-	  outline: none;
-	  width: 100%;
-	  margin-top: 40px;
-	  position: relative;
-	  font-size: 16px;
-	  transition: background .2s ease-in-out;
+	  svg {
+		transition: right .2s ease-in-out;
+		right: 30px;
+	  }
 
 	  &:hover {
-		background: lighten(#9dd558, 5%);
-
 		svg {
 		  right: 25px;
 		}
 	  }
+	}
+  }
 
-	  &:active {
-		background: darken(#9dd558, 5%);
+  &-empty {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	margin: auto 0;
+
+	&__title {
+	  font-size: 22px;
+	  font-weight: 600;
+	}
+
+	&__subtitle {
+	  font-size: 16px;
+	  font-weight: 400;
+	  opacity: .4;
+	  text-align: center;
+	}
+
+	&__button {
+	  svg {
+		transition: left .2s ease-in-out;
+		left: 30px;
 	  }
 
-	  svg {
-		position: absolute;
-		top: 50%;
-		transform: translateY(-50%);
-		right: 30px;
-		width: 20px;
-		height: 20px;
-		transition: right .2s ease-in-out;
+	  &:hover {
+		svg {
+		  left: 25px;
+		}
 	  }
 	}
   }

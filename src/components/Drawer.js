@@ -1,5 +1,5 @@
 import React from 'react';
-import { BsArrowRight, BsX } from "react-icons/bs";
+import { BsArrowRight, BsX, BsArrowLeft } from "react-icons/bs";
 
 function Drawer({ cartItems, onCloseCart, onDeleteItem }) {
 	console.log(cartItems);
@@ -13,40 +13,56 @@ function Drawer({ cartItems, onCloseCart, onDeleteItem }) {
 					</button>
 				</div>
 
-				<div className="cart-items">
-					{
-						cartItems && cartItems.map((cartItem) => (
-							<div className="cart-item" key={cartItem.id}>
-								<img className="cart-item__image" src={"/static/images/products/"+cartItem.image} alt="Sneakers" />
-								<div className="cart-item__description">
-									<div className="item-title">{cartItem.title}</div>
-									<div className="item-price">{cartItem.price} грн</div>
+				{
+					cartItems.length > 0 ?
+						(
+							<div className="cart-full">
+								<div className="cart-items">
+									{
+										cartItems && cartItems.map((cartItem) => (
+											<div className="cart-item" key={cartItem.id}>
+												<img className="cart-item__image" src={"/static/images/products/"+cartItem.image} alt="Sneakers" />
+												<div className="cart-item__description">
+													<div className="item-title">{cartItem.title}</div>
+													<div className="item-price">{cartItem.price} грн</div>
+												</div>
+												<button className="cart-item__delete" onClick={() => onDeleteItem(cartItem.id)}>
+													<BsX />
+												</button>
+											</div>
+										))
+									}
 								</div>
-								<button className="cart-item__delete" onClick={() => onDeleteItem(cartItem.id)}>
-									<BsX />
+
+								<div className="cart-total">
+									<div className="d-flex">
+										<div>Разом:</div>
+										<div className="cart-total__dashed"></div>
+										<div className="cart-total__price">7 500 грн</div>
+									</div>
+									<div className="d-flex mt-3">
+										<div>Податок 5%:</div>
+										<div className="cart-total__dashed"></div>
+										<div className="cart-total__price">375 грн</div>
+									</div>
+									<button className="cart--button cart-total__button">
+										<span>Оформити замовлення</span>
+										<BsArrowRight />
+									</button>
+								</div>
+							</div>
+						) : (
+							<div className="cart-empty">
+								<img src="./static/images/cart-empty.jpg" alt="cart empty"/>
+								<div className="cart-empty__title">Кошик порожній</div>
+								<div className="cart-empty__subtitle">Додайте хоча б одну пару кросівок, щоб зробити замовлення.</div>
+								<button className="cart--button cart-empty__button" onClick={onCloseCart}>
+									<BsArrowLeft />
+									<span>Повернутися назад</span>
 								</button>
 							</div>
-						))
-					}
-				</div>
-
-				<div className="cart-total">
-					<div className="d-flex">
-						<div>Разом:</div>
-						<div className="cart-total__dashed"></div>
-						<div className="cart-total__price">7 500 грн</div>
-					</div>
-					<div className="d-flex mt-3">
-						<div>Податок 5%:</div>
-						<div className="cart-total__dashed"></div>
-						<div className="cart-total__price">375 грн</div>
-					</div>
-					<button className="cart-total__button">
-						<span>Оформити замовлення</span>
-						<BsArrowRight />
-					</button>
-				</div>
-
+						)
+				}
 			</div>
 		</div>
 	);

@@ -3,19 +3,27 @@ import { BsHeart, BsPlus, BsCheck } from "react-icons/bs";
 
 import styles from './Card.module.scss';
 
-export default function Card({ id, title, image, price, onAddToCart }) {
+export default function Card({ uniqId, title, image, price, onAddToCart, onAddToFavorite }) {
 	const [isAdded, setIsAdded] = useState(false);
+	const [isFavorite, setIsFavorite] = useState(false);
 
 	const addToCart = () => {
-		onAddToCart({ id, title, image, price });
+		onAddToCart({ uniqId, title, image, price });
 		setIsAdded(!isAdded);
 	}
 
-	const classButton = styles['card-add'] + (isAdded ? ' ' + styles['is-active'] : '');
+	const addToFavorite = () => {
+		onAddToFavorite({ uniqId, title, image, price });
+		setIsFavorite(!isFavorite);
+	}
+
+	const classButtonAddCart = styles['card-add'] + (isAdded ? ' ' + styles['is-active'] : '');
+
+	const classButtonAddFavorite = styles['card-favorite'] + (isFavorite ? ' ' + styles['is-active'] : '');
 
 	return (
 		<div className={styles.card}>
-			<button className={styles['card-favorite']}>
+			<button className={classButtonAddFavorite} onClick={addToFavorite}>
 				<BsHeart />
 			</button>
 			<img className={styles['card-image']} src={`./static/images/products/${image}`} alt=""/>
@@ -25,7 +33,7 @@ export default function Card({ id, title, image, price, onAddToCart }) {
 					<div className={styles['card-price__title']}>Ціна:</div>
 					<div className={styles['card-price__price']}>{price} грн</div>
 				</div>
-				<button className={classButton} onClick={addToCart}>
+				<button className={classButtonAddCart} onClick={addToCart}>
 					{ isAdded ? <BsCheck /> : <BsPlus /> }
 				</button>
 			</div>
