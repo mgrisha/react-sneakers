@@ -1,9 +1,9 @@
-import { BsSearch } from "react-icons/bs";
 import axios from "axios";
 import Header from "./components/Header";
 import Drawer from "./components/Drawer";
-import Card from "./components/Card";
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
+import Home from "./pages/Home";
+import { Route, Routes } from 'react-router-dom';
 
 /* const arrProds = [
 	{
@@ -61,20 +61,16 @@ export default function App() {
 	const [favItems, setFavItems] = useState([]);
 	const [cartOpened, setCartOpened] = useState(false);
 	const [searchItem, setSearchItem] = useState('');
-	// const [totalPrice, setTotalPrice] = useState(0);
 
 	useEffect(() => {
 		axios.get('https://63c1c10f99c0a15d28f184b1.mockapi.io/items').then(res => {
 			setItems(res.data);
-			// console.log(res.data);
 		});
-		axios.get('https://63c1c10f99c0a15d28f184b1.mockapi.io/cart').then(res => {
-			setCartItems(res.data);
-			console.log(res.data);
-		});
+		// axios.get('https://63c1c10f99c0a15d28f184b1.mockapi.io/cart').then(res => {
+		// 	setCartItems(res.data);
+		// });
 		axios.get('https://63c1c10f99c0a15d28f184b1.mockapi.io/favorite').then(res => {
 			setFavItems(res.data);
-			console.log(res.data);
 		});
 	}, []);
 
@@ -82,7 +78,6 @@ export default function App() {
 		if (cartItems.find((cartItem) => cartItem.id === item.id)) {
 			axios.delete(`https://63c1c10f99c0a15d28f184b1.mockapi.io/cart/${item.id}`);
 			setCartItems((prev) => prev.filter((prevItem) => prevItem.id !== item.id));
-
 		} else {
 			axios.post('https://63c1c10f99c0a15d28f184b1.mockapi.io/cart', item);
 			setCartItems((prev) => [...prev, item]);
@@ -112,32 +107,12 @@ export default function App() {
 		<div className="wrapper">
 			{cartOpened && <Drawer cartItems={cartItems} onCloseCart={() => setCartOpened(false)} onDeleteItem={deleteItemFromCart} />}
 			<Header onOpenCart={() => setCartOpened(true)} totalPrice={0} />
-			<div className="main-slider">Main Slider</div>
-			<div className="content">
-				<div className="d-flex align-items-center justify-content-between mb-5">
-					<h1>{}</h1>
-					<div className="search-block d-flex">
-						<BsSearch className="search-icon" />
-						<input type="search" placeholder="Пошук..." onChange={searchItems} />
-					</div>
-				</div>
-				<div className="content-products">
-					{
-						items.filter((item) => item.title.toLowerCase().includes(searchItem)).map((item) => {
-							console.log(item);
-							return (
-								<Card
-									key={item.id}
-									{...item}
-									onAddToCart={onAddToCart}
-									onAddToFavorite={onAddToFavorite}
-								/>
-							);
-						})
-					}
-				</div>
-
-			</div>
+			{/*<Routes>*/}
+			{/*	<Route path="/" exact element={} />*/}
+			{/*</Routes>*/}
+			<Routes>
+				<Route path="/" exact element={<Home searchItem={searchItem} searchItems={searchItems} items={items} onAddToCart={onAddToCart} onAddToFavorite={onAddToFavorite} />} />
+			</Routes>
     </div>
   );
 }
