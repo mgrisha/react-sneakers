@@ -4,6 +4,7 @@ import Drawer from "./components/Drawer";
 import { useEffect, useState } from "react";
 import Home from "./pages/Home";
 import { Route, Routes } from 'react-router-dom';
+import Favorites from "./pages/Favorites";
 
 /* const arrProds = [
 	{
@@ -108,7 +109,7 @@ export default function App() {
 				setFavItems((prev) => [...prev, data]);
 			}
 		} catch (error) {
-			console.log('Не вдалося добавити до вибраних', error);
+			console.log('Не вдалося добавити до обраних', error);
 		}
 	}
 
@@ -134,6 +135,7 @@ export default function App() {
 					exact
 					element={<Home searchItem={searchItem} searchItems={searchItems} items={items} cartItems={cartItems} favItems={favItems} onAddToCart={onAddToCart} onAddToFavorite={onAddToFavorite} isLoading={isLoading} />}
 				/>
+				<Route path="/favorites" element={<Favorites favItems={favItems} onAddToFavorite={onAddToFavorite} isLoading={isLoading} onAddToCart={onAddToCart} favorite />} exact />
 			</Routes>
     </div>
   );

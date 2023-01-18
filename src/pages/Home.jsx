@@ -3,7 +3,8 @@ import Card from "../components/Card";
 import Loader from "../components/Loader";
 
 export default function Home ({ searchItem, searchItems, items, cartItems, favItems, onAddToCart, onAddToFavorite, isLoading }) {
-    console.log(favItems)
+    console.log(favItems);
+    console.log(items);
     return (
         <>
             <div className="main-slider">Main Slider</div>
@@ -24,7 +25,7 @@ export default function Home ({ searchItem, searchItems, items, cartItems, favIt
                                 items.length > 0 && items.filter((item) => item.title.toLowerCase().includes(searchItem)).map((item) => {
                                     return (
                                         <Card
-                                            favorited={favItems.some(favItem => favItem.uniqId === item.uniqId)}
+                                            favorite={favItems.some(favItem => favItem.uniqId === item.uniqId)}
                                             added={cartItems.some(cartItem => Number(cartItem.id) === Number(item.id))}
                                             key={item.uniqId}
                                             {...item}

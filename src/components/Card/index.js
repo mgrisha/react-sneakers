@@ -3,9 +3,9 @@ import { BsHeart, BsPlus, BsCheck } from "react-icons/bs";
 
 import styles from './Card.module.scss';
 
-export default function Card({ id, uniqId, title, image, price, onAddToCart, onAddToFavorite, favorited = false, added = false }) {
+export default function Card({ id, uniqId, title, image, price, onAddToCart, onAddToFavorite, favorite = false, added = false }) {
 	const [isAdded, setIsAdded] = useState(added);
-	const [isFavorite, setIsFavorite] = useState(favorited);
+	const [isFavorite, setIsFavorite] = useState(favorite);
 
 	const addToCart = () => {
 		onAddToCart({ id, uniqId, title, image, price });
