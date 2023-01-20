@@ -1,7 +1,12 @@
 import Loader from "../components/Loader";
 import Card from "../components/Card";
 
-export default function Favorites ({ favItems, onAddToFavorite, isLoading, onAddToCart }) {
+import AppContext from "../context";
+import { useContext } from "react";
+
+export default function Favorites ({ onAddToFavorite, isLoading, onAddToCart }) {
+    const state = useContext(AppContext)
+    const favItems = state.favItems;
     return (
         <div className="content">
             <div className="d-flex align-items-center justify-content-between mb-5">

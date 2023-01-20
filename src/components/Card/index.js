@@ -1,15 +1,17 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { BsHeart, BsPlus, BsCheck } from "react-icons/bs";
 
 import styles from './Card.module.scss';
+import AppContext from "../../context";
 
-export default function Card({ id, uniqId, title, image, price, onAddToCart, onAddToFavorite, favorite = false, added = false }) {
-	const [isAdded, setIsAdded] = useState(added);
+export default function Card({ id, uniqId, title, image, price, onAddToCart, onAddToFavorite, favorite = false }) {
+	const { cartItemIsAdded } = useContext(AppContext);
 	const [isFavorite, setIsFavorite] = useState(favorite);
+
+	const itemIsAddedIntoCart = cartItemIsAdded(id);
 
 	const addToCart = () => {
 		onAddToCart({ id, uniqId, title, image, price });
-		setIsAdded(!isAdded);
 	}
 
 	const addToFavorite = () => {
@@ -17,7 +19,7 @@ export default function Card({ id, uniqId, title, image, price, onAddToCart, onA
 		setIsFavorite(!isFavorite);
 	}
 
-	const classButtonAddCart = styles['card-add'] + (isAdded ? ' ' + styles['is-active'] : '');
+	const classButtonAddCart = styles['card-add'] + (itemIsAddedIntoCart ? ' ' + styles['is-active'] : '');
 
 	const classButtonAddFavorite = styles['card-favorite'] + (isFavorite ? ' ' + styles['is-active'] : '');
 
@@ -34,7 +36,7 @@ export default function Card({ id, uniqId, title, image, price, onAddToCart, onA
 					<div className={styles['card-price__price']}>{price} грн</div>
 				</div>
 				<button className={classButtonAddCart} onClick={addToCart}>
-					{ isAdded ? <BsCheck /> : <BsPlus /> }
+					{ itemIsAddedIntoCart ? <BsCheck /> : <BsPlus /> }
 				</button>
 			</div>
 		</div>

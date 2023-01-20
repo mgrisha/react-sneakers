@@ -2,9 +2,11 @@ import { BsSearch } from "react-icons/bs";
 import Card from "../components/Card";
 import Loader from "../components/Loader";
 
-export default function Home ({ searchItem, searchItems, items, cartItems, favItems, onAddToCart, onAddToFavorite, isLoading }) {
-    console.log(favItems);
-    console.log(items);
+import AppContext from "../context";
+import {useContext} from "react";
+
+export default function Home ({ searchItem, searchItems, onAddToCart, onAddToFavorite, isLoading }) {
+    const { items, cartItemIsAdded, favItemIsAdded } = useContext(AppContext);
     return (
         <>
             <div className="main-slider">Main Slider</div>
@@ -25,8 +27,8 @@ export default function Home ({ searchItem, searchItems, items, cartItems, favIt
                                 items.length > 0 && items.filter((item) => item.title.toLowerCase().includes(searchItem)).map((item) => {
                                     return (
                                         <Card
-                                            favorite={favItems.some(favItem => favItem.uniqId === item.uniqId)}
-                                            added={cartItems.some(cartItem => Number(cartItem.id) === Number(item.id))}
+                                            favorite={favItemIsAdded(item.uniqId)}
+                                            added={cartItemIsAdded(item.id)}
                                             key={item.uniqId}
                                             {...item}
                                             onAddToCart={onAddToCart}
