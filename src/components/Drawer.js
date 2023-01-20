@@ -1,8 +1,32 @@
-import React from 'react';
-import { BsArrowRight, BsX, BsArrowLeft } from "react-icons/bs";
+import React, {useContext, useState} from 'react';
+import { BsArrowRight, BsX } from "react-icons/bs";
+import axios from "axios";
 
-function Drawer({ cartItems, onCloseCart, onDeleteItem }) {
-	console.log(cartItems);
+import AppContext from "../context";
+import Info from "./Info";
+
+function Drawer({ onCloseCart, onDeleteItem }) {
+	const [orderId, setOrderId] = useState(null);
+	const [isOrderComplete, setIsOrderComplete] = useState(false);
+	const [isLoading, setIsLoading] = useState(false);
+	const { cartItems, setCartItems } = useContext(AppContext);
+	const totalSum = cartItems.reduce((sum, cartItem) => Number(cartItem.price) + sum, 0);
+
+	const onOrder = async () => {
+		try {
+			setIsLoading(true);
+			const { data } = await axios.post('https://63c1c10f99c0a15d28f184b1.mockapi.io/order', {
+				items: cartItems
+			});
+			setOrderId(data.id);
+			setIsOrderComplete(!isOrderComplete);
+			setCartItems([]);
+		} catch (err) {
+			console.log('Не вдалося сворити замовлення', err);
+		}
+		setIsLoading(false);
+	}
+
 	return (
 		<div className="overlay">
 			<div className="drawer">
@@ -38,29 +62,25 @@ function Drawer({ cartItems, onCloseCart, onDeleteItem }) {
 									<div className="d-flex">
 										<div>Разом:</div>
 										<div className="cart-total__dashed"></div>
-										<div className="cart-total__price">7 500 грн</div>
+										<div className="cart-total__price">{totalSum} грн</div>
 									</div>
 									<div className="d-flex mt-3">
 										<div>Податок 5%:</div>
 										<div className="cart-total__dashed"></div>
-										<div className="cart-total__price">375 грн</div>
+										<div className="cart-total__price">{totalSum / 100 * 5} грн</div>
 									</div>
-									<button className="cart--button cart-total__button">
+									<button onClick={onOrder} className="cart--button cart-total__button" disabled={isLoading}>
 										<span>Оформити замовлення</span>
 										<BsArrowRight />
 									</button>
 								</div>
 							</div>
 						) : (
-							<div className="cart-empty">
-								<img src="./static/images/cart-empty.jpg" alt="cart empty"/>
-								<div className="cart-empty__title">Кошик порожній</div>
-								<div className="cart-empty__subtitle">Додайте хоча б одну пару кросівок, щоб зробити замовлення.</div>
-								<button className="cart--button cart-empty__button" onClick={onCloseCart}>
-									<BsArrowLeft />
-									<span>Повернутися назад</span>
-								</button>
-							</div>
+							<Info
+								image={isOrderComplete ? "./static/images/order-complete.jpg" : "./static/images/cart-empty.jpg"}
+								title={isOrderComplete ? "Замовлення оформлено" : "Кошик порожній"}
+								description={isOrderComplete ? `Ваше замовлення №${orderId} скоро буде передано кур'єрській доставці` : "Додайте хоча б одну пару кросівок, щоб зробити замовлення."}
+							/>
 						)
 				}
 			</div>

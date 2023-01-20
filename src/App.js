@@ -134,10 +134,10 @@ export default function App() {
 	}
 
 	return (
-		<AppContext.Provider value={{ items, cartItems, favItems, cartItemIsAdded, favItemIsAdded }}>
+		<AppContext.Provider value={{ items, cartItems, setCartOpened, setCartItems, favItems, cartItemIsAdded, favItemIsAdded }}>
 			<div className="wrapper">
 				{cartOpened && <Drawer cartItems={cartItems} onCloseCart={() => setCartOpened(false)} onDeleteItem={deleteItemFromCart} />}
-				<Header onOpenCart={() => setCartOpened(true)} totalPrice={0} />
+				<Header onOpenCart={() => setCartOpened(true)} />
 				<Routes>
 					<Route
 						path="/"

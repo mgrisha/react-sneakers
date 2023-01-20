@@ -14,7 +14,7 @@ a {
   text-decoration: none;
 
   &:hover {
-	color: inherit;
+		color: inherit;
   }
 }
 
@@ -71,29 +71,29 @@ a {
     &__cart {
       display: flex;
       align-items: center;
-	  cursor: pointer;
+	  	cursor: pointer;
 
-	  &:hover {
-		svg {
-		  fill: #3cc755;
-		}
+			&:hover {
+				svg {
+					fill: #3cc755;
+				}
 
-		.header-cart__price {
-		  color: #3cc755;
-		}
-	  }
+				.header-cart__price {
+					color: #3cc755;
+				}
+			}
     }
 
     &__image, &__favorites, &__cabinet {
       width: 20px;
       height: 20px;
       fill: #9b9b9b;
-	  transition: fill .3s;
-	  cursor: pointer;
+			transition: fill .3s;
+			cursor: pointer;
 
-	  &:hover {
-		fill: #3cc755;
-	  }
+			&:hover {
+				fill: #3cc755;
+			}
     }
 
     &__favorites, &__cabinet {
@@ -117,39 +117,39 @@ a {
   padding: 45px;
 
   h1 {
-	margin: 0;
-	font-size: 32px;
-	font-weight: 700;
+		margin: 0;
+		font-size: 32px;
+		font-weight: 700;
   }
 
   &-products {
-	display: grid;
-	grid-template-columns: repeat(4, 1fr);
-	row-gap: 30px;
-	column-gap: 30px;
+		display: grid;
+		grid-template-columns: repeat(4, 1fr);
+		row-gap: 30px;
+		column-gap: 30px;
   }
 
   .search {
-	&-block {
-	  border-radius: 10px;
-	  border: 1px solid #f3f3f3;
-	  height: 45px;
-	  width: 250px;
-	  padding: 10px;
-	  display: flex;
-	  align-items: center;
+		&-block {
+			border-radius: 10px;
+			border: 1px solid #f3f3f3;
+			height: 45px;
+			width: 250px;
+			padding: 10px;
+			display: flex;
+			align-items: center;
 
-	  input[type="search"] {
-		border: none;
-		outline: none;
-		margin-left: 10px;
-		color: #c4c4c4;
-	  }
-	}
+			input[type="search"] {
+			border: none;
+			outline: none;
+			margin-left: 10px;
+			color: #c4c4c4;
+			}
+		}
 
-	&-icon {
-	  fill: #e4e4e4;
-	}
+		&-icon {
+			fill: #e4e4e4;
+		}
   }
 }
 
@@ -177,160 +177,182 @@ a {
   flex-direction: column;
 
   h2 {
-	margin: 0;
+		margin: 0;
   }
 }
 
 .cart {
   &-full {
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
-	height: 100%;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		height: 100%;
   }
 
   &-items {
-	flex: 1;
-	overflow: auto;
-	margin-bottom: 30px;
-	padding-right: 10px;
+		flex: 1;
+		overflow: auto;
+		margin-bottom: 30px;
+		padding-right: 10px;
   }
 
   &-item {
-	display: flex;
-	align-items: center;
-	border: 1px solid #f3f3f3;
-	border-radius: 20px;
-	padding: 10px;
+		display: flex;
+		align-items: center;
+		border: 1px solid #f3f3f3;
+		border-radius: 20px;
+		padding: 10px;
 
-	&:not(:first-child) {
-	  margin-top: 20px;
-	}
-
-	&__image {
-	  width: 85px;
-	}
-
-	&__description {
-	  margin: 15px 15px 0 15px;
-
-	  .item-price {
-		font-weight: 900;
-		margin-top: 10px;
-	  }
-	}
-
-	&__delete {
-	  border: 1px solid #dbdbdb;
-	  background: #fff;
-	  padding: 5px;
-	  border-radius: 8px;
-	  transition: background-color .3s ease-in-out;
-
-	  svg {
-		fill: #b5b5b5;
-		width: 15px;
-		height: 15px;
-		transition: fill .3s ease-in-out;
-	  }
-
-	  &:hover {
-		background-color: #dbdbdb;
-
-		svg {
-		  fill: #fff;
+		&:not(:first-child) {
+			margin-top: 20px;
 		}
-	  }
-	}
+
+		&__image {
+			width: 85px;
+		}
+
+		&__description {
+			margin: 15px 15px 0 15px;
+
+			.item-price {
+			font-weight: 900;
+			margin-top: 10px;
+			}
+		}
+
+		&__delete {
+			border: 1px solid #dbdbdb;
+			background: #fff;
+			padding: 5px;
+			border-radius: 8px;
+			transition: background-color .3s ease-in-out;
+
+			svg {
+				fill: #b5b5b5;
+				width: 15px;
+				height: 15px;
+				transition: fill .3s ease-in-out;
+			}
+
+			&:hover {
+				background-color: #dbdbdb;
+
+				svg {
+					fill: #fff;
+				}
+	  	}
+		}
   }
 
   &--button {
-	height: 50px;
-	background: #9dd558;
-	border-radius: 18px;
-	color: #ffffff;
-	border: 0;
-	outline: none;
-	width: 100%;
-	margin-top: 40px;
-	position: relative;
-	font-size: 16px;
-	transition: background .2s ease-in-out;
+		height: 50px;
+		background: #9dd558;
+		border-radius: 18px;
+		color: #ffffff;
+		border: 0;
+		outline: none;
+		width: 100%;
+		margin-top: 40px;
+		position: relative;
+		font-size: 16px;
+		transition: background .2s ease-in-out;
 
-	svg {
-	  position: absolute;
-	  top: 50%;
-	  transform: translateY(-50%);
-	  width: 20px;
-	  height: 20px;
-	}
+		svg {
+			position: absolute;
+			top: 50%;
+			transform: translateY(-50%);
+			width: 20px;
+			height: 20px;
+		}
 
-	&:hover {
-	  background: lighten(#9dd558, 5%);
-	}
+		&:hover {
+			background: lighten(#9dd558, 5%);
+		}
 
-	&:active {
-	  background: darken(#9dd558, 5%);
-	}
+		&:active {
+			background: darken(#9dd558, 5%);
+		}
   }
 
   &-total {
-	&__dashed {
-	  flex: 1;
-	  height: 1px;
-	  border-bottom: 1px dashed #dfdfdf;
-	  align-self: flex-end;
-	  margin: 0 10px 5px;
-	}
-
-	&__price {
-	  font-weight: 900;
-	}
-
-	&__button {
-	  svg {
-		transition: right .2s ease-in-out;
-		right: 30px;
-	  }
-
-	  &:hover {
-		svg {
-		  right: 25px;
+		&__dashed {
+			flex: 1;
+			height: 1px;
+			border-bottom: 1px dashed #dfdfdf;
+			align-self: flex-end;
+			margin: 0 10px 5px;
 		}
-	  }
-	}
+
+		&__price {
+			font-weight: 900;
+		}
+
+		&__button {
+			svg {
+				transition: right .2s ease-in-out;
+				right: 30px;
+			}
+
+			&:disabled {
+				animation: button-loading .3 ease-in-out infinite;
+				background-color: #bebebe;
+				cursor: default;
+			}
+
+			&:hover {
+				svg {
+					right: 25px;
+				}
+	  	}
+		}
   }
 
   &-empty {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	flex-direction: column;
-	margin: auto 0;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		flex-direction: column;
+		margin: auto 0;
 
-	&__title {
-	  font-size: 22px;
-	  font-weight: 600;
-	}
+    &__image {
+      width: 110px;
+    }
 
-	&__subtitle {
-	  font-size: 16px;
-	  font-weight: 400;
-	  opacity: .4;
-	  text-align: center;
-	}
-
-	&__button {
-	  svg {
-		transition: left .2s ease-in-out;
-		left: 30px;
-	  }
-
-	  &:hover {
-		svg {
-		  left: 25px;
+		&__title {
+			font-size: 22px;
+			font-weight: 600;
 		}
-	  }
-	}
+
+		&__subtitle {
+			font-size: 16px;
+			font-weight: 400;
+			opacity: .4;
+			text-align: center;
+		}
+
+		&__button {
+			svg {
+				transition: left .2s ease-in-out;
+				left: 30px;
+			}
+
+			&:hover {
+				svg {
+					left: 25px;
+				}
+	  	}
+		}
   }
+}
+
+@keyframes button-loading {
+	0% {
+		opacity: 1;
+	}
+	50% {
+		opacity: 0.5;
+	}
+	100% {
+		opacity: 1;
+	}
 }

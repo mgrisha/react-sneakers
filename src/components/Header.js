@@ -1,8 +1,11 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import { BsCart3, BsHeart, BsPersonCircle } from "react-icons/bs";
 import { Link } from "react-router-dom";
+import AppContext from "../context";
 
-function Header({ onOpenCart, totalPrice }) {
+function Header({ onOpenCart }) {
+	const { cartItems } = useContext(AppContext);
+	const totalSum = cartItems.reduce((sum, cartItem) => Number(cartItem.price) + sum, 0);
 	return (
 		<header className="header">
 			<Link to="/">
@@ -17,7 +20,7 @@ function Header({ onOpenCart, totalPrice }) {
 			<div className="header-cart">
 				<div className="header-cart__cart" onClick={onOpenCart}>
 					<BsCart3 className="header-cart__image" />
-					<span className="header-cart__price">{totalPrice} грн</span>
+					<span className="header-cart__price">{totalSum} грн</span>
 				</div>
 				<Link to="/favorites">
 					<BsHeart className="header-cart__favorites" />
