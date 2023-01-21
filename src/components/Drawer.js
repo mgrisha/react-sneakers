@@ -1,16 +1,14 @@
-import React, {useContext, useState} from 'react';
+import React, { useState } from 'react';
 import { BsArrowRight, BsX } from "react-icons/bs";
 import axios from "axios";
-
-import AppContext from "../context";
 import Info from "./Info";
+import { useCart } from "../hooks/useCart";
 
 function Drawer({ onCloseCart, onDeleteItem }) {
 	const [orderId, setOrderId] = useState(null);
 	const [isOrderComplete, setIsOrderComplete] = useState(false);
 	const [isLoading, setIsLoading] = useState(false);
-	const { cartItems, setCartItems } = useContext(AppContext);
-	const totalSum = cartItems.reduce((sum, cartItem) => Number(cartItem.price) + sum, 0);
+	const { cartItems, setCartItems, totalSum } = useCart();
 
 	const onOrder = async () => {
 		try {
@@ -18,6 +16,7 @@ function Drawer({ onCloseCart, onDeleteItem }) {
 			const { data } = await axios.post('https://63c1c10f99c0a15d28f184b1.mockapi.io/order', {
 				items: cartItems
 			});
+			await axios.put('https://63c1c10f99c0a15d28f184b1.mockapi.io/cart', []);
 			setOrderId(data.id);
 			setIsOrderComplete(!isOrderComplete);
 			setCartItems([]);

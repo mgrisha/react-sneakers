@@ -8,6 +8,7 @@ import Home from "./pages/Home";
 import Favorites from "./pages/Favorites";
 
 import AppContext from "./context";
+import Orders from "./pages/Orders";
 
 /* const arrProds = [
 	{
@@ -134,7 +135,7 @@ export default function App() {
 	}
 
 	return (
-		<AppContext.Provider value={{ items, cartItems, setCartOpened, setCartItems, favItems, cartItemIsAdded, favItemIsAdded }}>
+		<AppContext.Provider value={{ items, cartItems, setCartOpened, setCartItems, favItems, onAddToFavorite, onAddToCart, cartItemIsAdded, favItemIsAdded }}>
 			<div className="wrapper">
 				{cartOpened && <Drawer cartItems={cartItems} onCloseCart={() => setCartOpened(false)} onDeleteItem={deleteItemFromCart} />}
 				<Header onOpenCart={() => setCartOpened(true)} />
@@ -154,6 +155,7 @@ export default function App() {
 							}
 					/>
 					<Route path="/favorites" element={<Favorites onAddToFavorite={onAddToFavorite} isLoading={isLoading} onAddToCart={onAddToCart} favorite />} exact />
+					<Route path="/orders" element={<Orders /> } exact />
 				</Routes>
 			</div>
 		</AppContext.Provider>

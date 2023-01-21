@@ -1,11 +1,10 @@
-import React, {useContext} from 'react';
+import React from 'react';
 import { BsCart3, BsHeart, BsPersonCircle } from "react-icons/bs";
 import { Link } from "react-router-dom";
-import AppContext from "../context";
+import { useCart } from "../hooks/useCart";
 
 function Header({ onOpenCart }) {
-	const { cartItems } = useContext(AppContext);
-	const totalSum = cartItems.reduce((sum, cartItem) => Number(cartItem.price) + sum, 0);
+	const { totalSum } = useCart();
 	return (
 		<header className="header">
 			<Link to="/">
@@ -25,7 +24,9 @@ function Header({ onOpenCart }) {
 				<Link to="/favorites">
 					<BsHeart className="header-cart__favorites" />
 				</Link>
-				<BsPersonCircle  className="header-cart__cabinet" />
+				<Link to="/orders">
+					<BsPersonCircle  className="header-cart__cabinet" />
+				</Link>
 			</div>
 		</header>
 	);
