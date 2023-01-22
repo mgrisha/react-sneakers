@@ -10,56 +10,6 @@ import Favorites from "./pages/Favorites";
 import AppContext from "./context";
 import Orders from "./pages/Orders";
 
-/* const arrProds = [
-	{
-		"key": 1,
-		"title": "Чоловічі кросівки Nike Blazer Mid Suede",
-		"image": "1.jpg",
-		"price": "12999"
-	},
-	{
-		"key": 2,
-		"title": "Чоловічі кросівки Nike Air Max 270",
-		"image": "2.jpg",
-		"price": "12999"
-	},
-	{
-		"key": 3,
-		"title": "Чоловічі кросівки Nike Blazer Mid Suede",
-		"image": "3.jpg",
-		"price": "8499"
-	},
-	{
-		"key": 4,
-		"title": "Кросівки Puma X Aka Boku Future Rider",
-		"image": "4.jpg",
-		"price": "8999"
-	},
-	{
-		"key": 5,
-		"title": "Чоловічі кросівки Under Armour Curry 8",
-		"image": "5.jpg",
-		"price": "15199"
-	},
-	{
-		"key": 6,
-		"title": "Чоловічі кросівки Nike Kyrie 7",
-		"image": "6.jpg",
-		"price": "11299"
-	},
-	{
-		"key": 7,
-		"title": "Чоловічі кросівки Jordan Air Jordan 11",
-		"image": "7.jpg",
-		"price": "10799"
-	},
-	{
-		"key": 8,
-		"title": "Чоловічі кросівки Nike LeBron XVIII",
-		"image": "8.jpg",
-		"price": "16499"
-	}
-]; */
 export default function App() {
 	const [items, setItems] = useState([]);
 	const [cartItems, setCartItems] = useState([]);
@@ -98,32 +48,40 @@ export default function App() {
 	}, []);
 
 	const onAddToCart = async (item) => {
-		try {
-			const cartItemsMock = cartItems.find((cartItem) => cartItem.uniqId === item.uniqId);
-			if (cartItemsMock) {
+		const cartItemsMock = cartItems.find((cartItem) => cartItem.uniqId === item.uniqId);
+		if (cartItemsMock) {
+			try {
 				await axios.delete(`https://63c1c10f99c0a15d28f184b1.mockapi.io/cart/${cartItemsMock.id}`);
 				setCartItems((prev) => prev.filter((prevItem) => prevItem.uniqId !== item.uniqId));
-			} else {
-				await axios.post('https://63c1c10f99c0a15d28f184b1.mockapi.io/cart', item);
-				setCartItems((prev) => [...prev, item]);
+			} catch (error) {
+				console.error('Помилка з видаленням товару з кошику', error);
 			}
-		} catch (error) {
-			console.log('Помилка з товарами в кошику', error)
+		} else {
+			try {
+				const { data } = await axios.post('https://63c1c10f99c0a15d28f184b1.mockapi.io/cart', item);
+				setCartItems((prev) => [...prev, data]);
+			} catch (error) {
+				console.error('Помилка з додаванням товару в кошику', error);
+			}
 		}
 	}
 
 	const onAddToFavorite = async (item) => {
-		try {
-			const favItemsMock = favItems.find((favItem) => favItem.uniqId === item.uniqId);
-			if (favItemsMock) {
+		const favItemsMock = favItems.find((favItem) => favItem.uniqId === item.uniqId);
+		if (favItemsMock) {
+			try	{
 				await axios.delete(`https://63c1c10f99c0a15d28f184b1.mockapi.io/favorites/${favItemsMock.id}`);
 				setFavItems((prev) => prev.filter((prevItem) => prevItem.uniqId !== item.uniqId));
-			} else {
+			} catch (error) {
+				console.error('Помилка з видаленням товару з обраних', error);
+			}
+		} else {
+			try	{
 				const { data } = await axios.post('https://63c1c10f99c0a15d28f184b1.mockapi.io/favorites', item);
 				setFavItems((prev) => [...prev, data]);
+			} catch (error) {
+				console.error('Помилка з додаванням товару до обраних', error);
 			}
-		} catch (error) {
-			console.log('Не вдалося добавити до обраних', error);
 		}
 	}
 
