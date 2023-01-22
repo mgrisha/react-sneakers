@@ -112,10 +112,10 @@ export default function App() {
 	const onAddToFavorite = async (item) => {
 		try {
 			if (favItems.find((favItem) => favItem.uniqId === item.uniqId)) {
-				await axios.delete(`https://63c1c10f99c0a15d28f184b1.mockapi.io/favorite/${item.id}`);
+				await axios.delete(`https://63c1c10f99c0a15d28f184b1.mockapi.io/favorites/${item.id}`);
 				setFavItems((prev) => prev.filter((prevItem) => prevItem.uniqId !== item.uniqId));
 			} else {
-				const { data } = await axios.post('https://63c1c10f99c0a15d28f184b1.mockapi.io/favorite', item);
+				const { data } = await axios.post('https://63c1c10f99c0a15d28f184b1.mockapi.io/favorites', item);
 				setFavItems((prev) => [...prev, data]);
 			}
 		} catch (error) {

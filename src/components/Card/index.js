@@ -4,11 +4,11 @@ import { BsHeart, BsPlus, BsCheck } from "react-icons/bs";
 import styles from './Card.module.scss';
 import AppContext from "../../context";
 
-export default function Card({ id, uniqId, title, image, price, onAddToCart, onAddToFavorite, favorite = false }) {
+export default function Card({ id, uniqId, title, image, price, parentId, onAddToCart, onAddToFavorite, favorite = false }) {
 	const { cartItemIsAdded } = useContext(AppContext);
 	const [isFavorite, setIsFavorite] = useState(favorite);
 
-	const itemIsAddedIntoCart = cartItemIsAdded(id);
+	const itemIsAddedIntoCart = cartItemIsAdded(parentId);
 
 	const itemObj = { id, parentId: id, uniqId, title, image, price };
 
