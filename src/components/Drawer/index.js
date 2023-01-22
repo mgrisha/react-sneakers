@@ -7,6 +7,8 @@ import { useCart } from "../../hooks/useCart";
 
 import styles from './Drawer.module.scss';
 
+const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
 function Drawer({ onCloseCart, onDeleteItem, opened }) {
 	const [orderId, setOrderId] = useState(null);
 	const [isOrderComplete, setIsOrderComplete] = useState(false);
@@ -16,13 +18,19 @@ function Drawer({ onCloseCart, onDeleteItem, opened }) {
 	const onOrder = async () => {
 		try {
 			setIsLoading(true);
-			const { data } = await axios.post('https://63c1c10f99c0a15d28f184b1.mockapi.io/order', {
+			const { data } = await axios.post('https://63c1c10f99c0a15d28f184b1.mockapi.io/orders', {
 				items: cartItems
 			});
-			await axios.put('https://63c1c10f99c0a15d28f184b1.mockapi.io/cart', []);
 			setOrderId(data.id);
-			setIsOrderComplete(!isOrderComplete);
+			setIsOrderComplete(true);
 			setCartItems([]);
+
+			for (let i = 0; i < cartItems.length; i++) {
+				const cartItem = cartItems[i];
+				await axios.delete(`https://63c1c10f99c0a15d28f184b1.mockapi.io/cart/${cartItem.id}`);
+				await delay(1000);
+			}
+
 		} catch (err) {
 			console.log('Не вдалося сворити замовлення', err);
 		}

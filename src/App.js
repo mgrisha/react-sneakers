@@ -84,6 +84,8 @@ export default function App() {
 			setFavItems(favoritesResponse.data);
 			setItems(itemsResponse.data);
 
+			// console.log(favItems);
+
 			setIsLoading(false);
 		}
 		fetchData();
@@ -97,8 +99,9 @@ export default function App() {
 
 	const onAddToCart = async (item) => {
 		try {
-			if (cartItems.find((cartItem) => cartItem.uniqId === item.uniqId)) {
-				await axios.delete(`https://63c1c10f99c0a15d28f184b1.mockapi.io/cart/${item.id}`);
+			const cartItemsMock = cartItems.find((cartItem) => cartItem.uniqId === item.uniqId);
+			if (cartItemsMock) {
+				await axios.delete(`https://63c1c10f99c0a15d28f184b1.mockapi.io/cart/${cartItemsMock.id}`);
 				setCartItems((prev) => prev.filter((prevItem) => prevItem.uniqId !== item.uniqId));
 			} else {
 				await axios.post('https://63c1c10f99c0a15d28f184b1.mockapi.io/cart', item);
@@ -111,8 +114,9 @@ export default function App() {
 
 	const onAddToFavorite = async (item) => {
 		try {
-			if (favItems.find((favItem) => favItem.uniqId === item.uniqId)) {
-				await axios.delete(`https://63c1c10f99c0a15d28f184b1.mockapi.io/favorites/${item.id}`);
+			const favItemsMock = favItems.find((favItem) => favItem.uniqId === item.uniqId);
+			if (favItemsMock) {
+				await axios.delete(`https://63c1c10f99c0a15d28f184b1.mockapi.io/favorites/${favItemsMock.id}`);
 				setFavItems((prev) => prev.filter((prevItem) => prevItem.uniqId !== item.uniqId));
 			} else {
 				const { data } = await axios.post('https://63c1c10f99c0a15d28f184b1.mockapi.io/favorites', item);
@@ -132,8 +136,8 @@ export default function App() {
 		setSearchItem(event.target.value);
 	}
 
-	const cartItemIsAdded = (id) => {
-		return cartItems.some((cartItem) => Number(cartItem.id) === Number(id));
+	const cartItemIsAdded = (uniqId) => {
+		return cartItems.some((cartItem) => cartItem.uniqId === uniqId);
 	}
 
 	const favItemIsAdded = (uniqId) => {

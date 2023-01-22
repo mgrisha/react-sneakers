@@ -13,7 +13,7 @@ export default function Orders () {
             try {
                 const { data } = await axios.get('https://63c1c10f99c0a15d28f184b1.mockapi.io/orders');
                 // setOrders(data.map((order) => order.item).flat());
-                setOrders(data.reduce((prev, order) => [...prev, ...order.item], []));
+                setOrders(data.reduce((prev, order) => [...prev, ...order.items], []));
                 setIsLoading(false);
             } catch (err) {
                 console.log('Помилка при отриманні замовлень', err);
