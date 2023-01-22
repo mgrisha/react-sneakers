@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
 import { BsArrowRight, BsX } from "react-icons/bs";
 import axios from "axios";
-import Info from "./Info";
-import { useCart } from "../hooks/useCart";
 
-function Drawer({ onCloseCart, onDeleteItem }) {
+import Info from "../Info";
+import { useCart } from "../../hooks/useCart";
+
+import styles from './Drawer.module.scss';
+
+function Drawer({ onCloseCart, onDeleteItem, opened }) {
 	const [orderId, setOrderId] = useState(null);
 	const [isOrderComplete, setIsOrderComplete] = useState(false);
 	const [isLoading, setIsLoading] = useState(false);
@@ -27,8 +30,8 @@ function Drawer({ onCloseCart, onDeleteItem }) {
 	}
 
 	return (
-		<div className="overlay">
-			<div className="drawer">
+		<div className={`${styles.overlay} ${opened ? styles['overlay-visible'] : ''}`}>
+			<div className={styles.drawer}>
 				<div className="d-flex justify-content-between align-items-center mb-4">
 					<h2>Кошик</h2>
 					<button className="cart-item__delete" onClick={onCloseCart}>

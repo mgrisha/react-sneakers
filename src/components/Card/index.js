@@ -10,12 +10,14 @@ export default function Card({ id, uniqId, title, image, price, onAddToCart, onA
 
 	const itemIsAddedIntoCart = cartItemIsAdded(id);
 
+	const itemObj = { id, parentId: id, uniqId, title, image, price };
+
 	const addToCart = () => {
-		onAddToCart({ id, uniqId, title, image, price });
+		onAddToCart(itemObj);
 	}
 
 	const addToFavorite = () => {
-		onAddToFavorite({ id, uniqId, title, image, price });
+		onAddToFavorite(itemObj);
 		setIsFavorite(!isFavorite);
 	}
 

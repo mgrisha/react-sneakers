@@ -70,12 +70,18 @@ export default function App() {
 
 	useEffect(() => {
 		async function fetchData () {
-			const cartResponse = await axios.get('https://63c1c10f99c0a15d28f184b1.mockapi.io/cart');
+			const [cartResponse, favoritesResponse, itemsResponse] = await Promise.all([
+				axios.get('https://63c1c10f99c0a15d28f184b1.mockapi.io/cart'),
+				axios.get('https://63c1c10f99c0a15d28f184b1.mockapi.io/favorites'),
+				axios.get('https://63c1c10f99c0a15d28f184b1.mockapi.io/items')
+			]);
+
+			// const cartResponse = await axios.get('https://63c1c10f99c0a15d28f184b1.mockapi.io/cart');
 			// const favoritesResponse = await axios.get('https://63c1c10f99c0a15d28f184b1.mockapi.io/favorite');
-			const itemsResponse = await axios.get('https://63c1c10f99c0a15d28f184b1.mockapi.io/items');
+			// const itemsResponse = await axios.get('https://63c1c10f99c0a15d28f184b1.mockapi.io/items');
 
 			setCartItems(cartResponse.data);
-			// setFavItems(favoritesResponse.data);
+			setFavItems(favoritesResponse.data);
 			setItems(itemsResponse.data);
 
 			setIsLoading(false);
@@ -137,7 +143,7 @@ export default function App() {
 	return (
 		<AppContext.Provider value={{ items, cartItems, setCartOpened, setCartItems, favItems, onAddToFavorite, onAddToCart, cartItemIsAdded, favItemIsAdded }}>
 			<div className="wrapper">
-				{cartOpened && <Drawer cartItems={cartItems} onCloseCart={() => setCartOpened(false)} onDeleteItem={deleteItemFromCart} />}
+				<Drawer cartItems={cartItems} onCloseCart={() => setCartOpened(false)} onDeleteItem={deleteItemFromCart} opened={cartOpened} />
 				<Header onOpenCart={() => setCartOpened(true)} />
 				<Routes>
 					<Route
