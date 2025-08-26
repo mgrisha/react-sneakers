@@ -45,7 +45,7 @@ export default function Card({
       )}
       <img
         className={styles["card-image"]}
-        src={`/static/images/products/${image}`}
+        src={`./static/images/products/${image}`}
         alt={title}
       />
       <div>{title}</div>
