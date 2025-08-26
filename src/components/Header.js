@@ -8,7 +8,7 @@ function Header({ onOpenCart }) {
     <header className="header">
       <Link to="/">
         <div className="header-logo">
-          <img className="logo" src="static/images/logo.png" alt="logo" />
+          <img className="logo" src="/static/images/logo.png" alt="logo" />
           <div className="d-flex flex-column ms-3">
             <div className="header-logo__title">react sneakers</div>
             <div className="header-logo__subtitle">
