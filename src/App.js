@@ -2,7 +2,7 @@ import axios from "axios";
 import Header from "./components/Header";
 import Drawer from "./components/Drawer";
 import { useEffect, useState } from "react";
-import { Route, Routes, HashRouter, BrowserRouter } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 
 import Home from "./pages/Home";
 import Favorites from "./pages/Favorites";
