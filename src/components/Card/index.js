@@ -45,7 +45,7 @@ export default function Card({
       )}
       <img
         className={styles["card-image"]}
-        src={`./static/images/products/${image}`}
+        src={`${process.env.PUBLIC_URL}/static/images/products/${image}`}
         alt={title}
       />
       <div>{title}</div>
