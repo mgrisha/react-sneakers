@@ -61,7 +61,7 @@ function Drawer({ onCloseCart, onDeleteItem, opened }) {
                   <div className="cart-item" key={cartItem.id}>
                     <img
                       className="cart-item__image"
-                      src={"static/images/products/" + cartItem.image}
+                      src={`${process.env.PUBLIC_URL}/static/images/products/${cartItem.image}`}
                       alt="Sneakers"
                     />
                     <div className="cart-item__description">
