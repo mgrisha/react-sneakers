@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <script>
-      let redirect = window.location.pathname.replace("/react-sneakers", "");
+      const redirect = location.pathname;
       location.replace("/react-sneakers/index.html#" + redirect);
     </script>
   </head>
